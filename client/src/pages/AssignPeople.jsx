@@ -61,14 +61,14 @@ function AssignPeople() {
   const handleFinish = () => {
     const splits = calculateSplits();
     
-    navigate('/split-result', {
+    navigate('/who-paid', {
       state: {
-        imagePreview,
-        items,
-        people,
-        assignments,
-        splits,
-        total
+      imagePreview,
+      items,
+      people,
+      assignments,
+      splits,
+      total
       }
     });
   };

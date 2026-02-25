@@ -1,21 +1,46 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
+import api from '../utils/api';
 
 function SplitResult() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [saving, setSaving] = useState(false);
   
-  const { imagePreview, items, people, assignments, splits, total } = location.state || {};
+  const { imagePreview, items, people, assignments, splits, total, payer } = location.state || {};
 
   if (!splits) {
     navigate('/dashboard');
     return null;
   }
 
-  const handleSave = () => {
-    // TODO: Save to database (Day 4)
-    toast.success('Split saved successfully!');
-    navigate('/dashboard');
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const splitsArray = people.map(person => ({
+        person,
+        amount: splits[person] || 0,
+        items: items
+          .filter(item => (assignments[item.id] || []).includes(person))
+          .map(item => item.name),
+      }));
+
+      await api.post('/expenses/save', {
+        items: items.map(({ name, price }) => ({ name, price })),
+        people,
+        splits: splitsArray,
+        totalAmount: total,
+      });
+
+      toast.success('Split saved successfully!');
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Save error:', error);
+      toast.error('Failed to save. Please try again.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -38,7 +63,7 @@ function SplitResult() {
             Split Calculated!
           </h2>
           <p className="text-gray-600">
-            Total: ₹{total} • {people.length} people • {items.length} items
+            Total: ₹{total.toFixed(2)} • {people.length} people • {items.length} items
           </p>
         </div>
 
@@ -51,8 +76,8 @@ function SplitResult() {
           <div className="divide-y divide-gray-200">
             {people.map(person => {
               const amount = splits[person] || 0;
-              const isYou = person === 'You';
-              
+              const isYou = person === payer;
+
               return (
                 <div key={person} className="p-4">
                   <div className="flex justify-between items-center">
@@ -62,7 +87,7 @@ function SplitResult() {
                         {isYou && <span className="ml-2 text-sm text-indigo-600">(paid)</span>}
                       </p>
                       <p className="text-sm text-gray-600">
-                        {isYou ? 'Total paid' : 'Owes you'}
+                        {isYou ? 'Paid the bill' : `Owes ${payer}`}
                       </p>
                     </div>
                     <p className={`text-2xl font-bold ${
@@ -109,9 +134,10 @@ function SplitResult() {
         <div className="space-y-3">
           <button
             onClick={handleSave}
-            className="w-full px-6 py-4 bg-indigo-600 text-white rounded-xl font-bold text-lg hover:bg-indigo-700 transition"
+            disabled={saving}
+            className="w-full px-6 py-4 bg-indigo-600 text-white rounded-xl font-bold text-lg hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Save Split
+            {saving ? 'Saving...' : 'Save Split'}
           </button>
           
           <button

@@ -7,6 +7,7 @@ import ScanReceipt from './pages/ScanReceipt';
 import ReviewItems from './pages/ReviewItems';
 import AssignPeople from './pages/AssignPeople';
 import SplitResult from './pages/SplitResult';
+import WhoPaid from './pages/WhoPaid';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -48,6 +49,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AssignPeople />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/who-paid"
+          element={
+            <ProtectedRoute>
+              <WhoPaid />
             </ProtectedRoute>
           }
         />

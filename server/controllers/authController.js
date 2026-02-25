@@ -90,7 +90,7 @@ exports.login = async (req, res) => {
 // Get current user
 exports.getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('-password');
+    const user = await User.findById(req.user._id).select('-password');
     res.json({ user });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function ScanReceipt() {
   const [image, setImage] = useState(null);
@@ -21,27 +22,54 @@ function ScanReceipt() {
     }
   };
 
-  const handleScan = () => {
+  // ✅ CHANGED: This function now calls real Google Vision API
+  const handleScan = async () => {
     setScanning(true);
-    
-    // Mock scanning - wait 2 seconds then go to review
-    setTimeout(() => {
-      // Pass image data to next page
-      navigate('/review-items', { 
-        state: { 
-          imagePreview,
-          // Mock extracted items
-          items: [
-            { id: 1, name: 'Margherita Pizza', price: 450, selected: true },
-            { id: 2, name: 'Pasta Alfredo', price: 320, selected: true },
-            { id: 3, name: 'Garlic Bread', price: 180, selected: true },
-            { id: 4, name: 'Coke (2x)', price: 120, selected: true },
-            { id: 5, name: 'Ice Cream', price: 150, selected: true },
-          ],
-          total: 1220
-        } 
+
+    try {
+      // imagePreview is already base64 (e.g. "data:image/jpeg;base64,/9j/...")
+      // We send it directly — the backend strips the prefix
+      const token = localStorage.getItem('token');
+
+      const response = await fetch('http://localhost:5000/api/expenses/scan', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ imageBase64: imagePreview }),
       });
-    }, 2000);
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Backend returned an error (bad image, OCR failed, etc.)
+        throw new Error(data.message || 'Scan failed');
+      }
+
+      // data.items = [{ name: 'Pizza', price: 450 }, ...]
+      // We add id and selected fields to match your existing ReviewItems format
+      const formattedItems = data.items.map((item, index) => ({
+        id: index + 1,
+        name: item.name,
+        price: item.price,
+        selected: true,
+      }));
+
+      const total = formattedItems.reduce((sum, item) => sum + item.price, 0);
+
+      navigate('/review-items', {
+        state: {
+          imagePreview,
+          items: formattedItems,
+          total: Math.round(total),
+        },
+      });
+
+    } catch (error) {
+      setScanning(false);
+      toast.error(error.message || 'Could not read receipt. Try a clearer photo.');
+    }
   };
 
   return (

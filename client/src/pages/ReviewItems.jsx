@@ -58,7 +58,7 @@ function ReviewItems() {
                 Receipt scanned successfully!
               </p>
               <p className="text-sm text-green-700">
-                Found {items.length} items • Total: ₹{total}
+                Found {items.length} items • Total: ₹{total.toFixed(2)}
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ function ReviewItems() {
                 <div className="flex-1">
                   <p className="font-medium text-gray-900">{item.name}</p>
                 </div>
-                <p className="font-bold text-gray-900">₹{item.price}</p>
+                <p className="font-bold text-gray-900">₹{item.price.toFixed(2)}</p>
               </label>
             ))}
           </div>
@@ -108,7 +108,7 @@ function ReviewItems() {
             <div className="flex justify-between items-center">
               <span className="font-bold text-gray-900">Selected Total</span>
               <span className="text-2xl font-bold text-indigo-600">
-                ₹{selectedTotal}
+                ₹{selectedTotal.toFixed(2)}
               </span>
             </div>
             <p className="text-sm text-gray-600 mt-1">
