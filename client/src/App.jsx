@@ -9,6 +9,8 @@ import AssignPeople from './pages/AssignPeople';
 import SplitResult from './pages/SplitResult';
 import WhoPaid from './pages/WhoPaid';
 import ProtectedRoute from './components/ProtectedRoute';
+import Analytics from './pages/Analytics';
+import ExpenseDetail from './pages/ExpenseDetail';
 
 function App() {
   return (
@@ -65,6 +67,22 @@ function App() {
           element={
             <ProtectedRoute>
               <SplitResult />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/expense/:id"
+          element={
+            <ProtectedRoute>
+              <ExpenseDetail />
             </ProtectedRoute>
           }
         />

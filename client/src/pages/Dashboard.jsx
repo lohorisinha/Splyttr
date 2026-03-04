@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
+import toast from 'react-hot-toast';
 
 function Dashboard() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchExpenses = async () => {
@@ -28,7 +30,30 @@ function Dashboard() {
     navigate('/login');
   };
 
+  const handleDelete = async (id) => {
+    if (!window.confirm('Delete this split?')) return;
+    try {
+      await api.delete(`/expenses/${id}`);
+      setExpenses(expenses.filter(e => e._id !== id));
+      toast.success('Split deleted');
+    } catch (error) {
+      toast.error('Failed to delete');
+    }
+  };
+
+  const filteredExpenses = expenses.filter(expense => {
+    if (!search.trim()) return true;
+    const term = search.toLowerCase();
+    return (
+      expense.people.some(p => p.toLowerCase().includes(term)) ||
+      expense.items.some(i => i.name.toLowerCase().includes(term)) ||
+      new Date(expense.createdAt).toLocaleDateString('en-IN', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      }).toLowerCase().includes(term)
+    );
+  });
   const totalSplits = expenses.length;
+
   const totalSpent = expenses.reduce((sum, e) => sum + (e.totalAmount || 0), 0);
 
   return (
@@ -42,6 +67,12 @@ function Dashboard() {
               <span className="text-gray-700">
                 Welcome, <span className="font-semibold">{user?.name}</span>
               </span>
+              <button
+                onClick={() => navigate('/analytics')}
+                className="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition font-semibold"
+              >
+                📊 Analytics
+              </button>
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
@@ -97,7 +128,16 @@ function Dashboard() {
 
         {/* Recent Splits */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Splits</h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold text-gray-900">Recent Splits</h3>
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by person or item..."
+              className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none w-64"
+            />
+          </div>
 
           {loading ? (
             <div className="text-center py-12 text-gray-500">Loading...</div>
@@ -114,10 +154,17 @@ function Dashboard() {
             </div>
           ) : (
             <div className="divide-y divide-gray-200">
-              {expenses.map(expense => (
+              {filteredExpenses.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  No splits found for "{search}"
+                </div>
+              ) : filteredExpenses.map(expense => (
                 <div key={expense._id} className="py-4 flex justify-between items-center">
-                  <div>
-                    <p className="font-semibold text-gray-900">
+                  <div
+                    className="cursor-pointer flex-1"
+                    onClick={() => navigate(`/expense/${expense._id}`)}
+                  >
+                    <p className="font-semibold text-gray-900 hover:text-indigo-600 transition">
                       {expense.items.length} items • {expense.people.length} people
                     </p>
                     <p className="text-sm text-gray-500">
@@ -126,9 +173,18 @@ function Dashboard() {
                       })}
                     </p>
                   </div>
-                  <p className="text-lg font-bold text-indigo-600">
-                    ₹{expense.totalAmount.toFixed(2)}
-                  </p>
+                  <div className="flex items-center gap-4">
+                    <p className="text-lg font-bold text-indigo-600">
+                      ₹{expense.totalAmount.toFixed(2)}
+                    </p>
+                    <button
+                      onClick={() => handleDelete(expense._id)}
+                      className="text-red-400 hover:text-red-600 transition text-xl font-bold"
+                      title="Delete split"
+                    >
+                      🗑️
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
