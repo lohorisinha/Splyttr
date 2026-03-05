@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://splyttr.vercel.app'
+    'https://splyttr-orcin.vercel.app'
   ],
   credentials: true
 }));

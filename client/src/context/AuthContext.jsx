@@ -42,15 +42,9 @@ export const AuthProvider = ({ children }) => {
     return response.data;
   };
 
-  // Register
+  // Register — just sends OTP, doesn't log in yet
   const register = async (name, email, password) => {
     const response = await authAPI.register({ name, email, password });
-    const { token, user } = response.data;
-    
-    localStorage.setItem('token', token);
-    setToken(token);
-    setUser(user);
-    
     return response.data;
   };
 

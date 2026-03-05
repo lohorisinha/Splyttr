@@ -11,6 +11,7 @@ import WhoPaid from './pages/WhoPaid';
 import ProtectedRoute from './components/ProtectedRoute';
 import Analytics from './pages/Analytics';
 import ExpenseDetail from './pages/ExpenseDetail';
+import VerifyOTP from './pages/VerifyOTP';
 
 function App() {
   return (
@@ -86,6 +87,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/verify-otp" element={<VerifyOTP />} />
 
         {/* Default redirect */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />

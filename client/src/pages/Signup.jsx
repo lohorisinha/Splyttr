@@ -28,8 +28,8 @@ function Signup() {
     setLoading(true);
     try {
       await register(name, email, password);
-      toast.success('Account created!');
-      navigate('/dashboard');
+      toast.success('OTP sent to your email!');
+      navigate('/verify-otp', { state: { email } });
     } catch (error) {
       toast.error(error.response?.data?.error || 'Signup failed');
     } finally {
