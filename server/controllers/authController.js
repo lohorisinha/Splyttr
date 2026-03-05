@@ -193,7 +193,9 @@ exports.register = async (req, res) => {
       });
     }
 
+    console.log('Sending OTP to:', email);
     await sendOTPEmail(email, name, otp);
+    console.log('OTP sent successfully');
 
     res.status(201).json({
       message: 'OTP sent to your email',
