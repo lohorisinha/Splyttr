@@ -1,4 +1,4 @@
-const resend = new Resend(process.env.RESEND_API_KEY);const User = require('../models/User');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
