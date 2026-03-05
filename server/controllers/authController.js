@@ -233,6 +233,9 @@ exports.verifyOTP = async (req, res) => {
       { expiresIn: '30d' }
     );
 
+    // Send welcome email in background
+    sendWelcomeEmail(user.email, user.name).catch(err => console.error('Welcome email failed:', err));
+
     res.json({
       message: 'Email verified successfully',
       token,
