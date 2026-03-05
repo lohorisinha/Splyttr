@@ -131,12 +131,7 @@ const sendWelcomeEmail = async (email, name) => {
                 <!-- CTA -->
                 <tr>
                   <td style="padding:8px 32px 40px;">
-                    
-                      href="https://splyttr-orcin.vercel.app"
-                      style="display:block;background-color:#084734;color:#ffffff;text-decoration:none;text-align:center;padding:16px;border-radius:14px;font-size:15px;font-weight:700;"
-                    >
-                      Start splitting →
-                    </a>
+                    <a href="https://splyttr-orcin.vercel.app" style="display:block;background-color:#084734;color:#ffffff;text-decoration:none;text-align:center;padding:16px;border-radius:14px;font-size:15px;font-weight:700;">Start splitting</a>
                   </td>
                 </tr>
 
