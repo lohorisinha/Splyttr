@@ -36,13 +36,14 @@ router.post('/scan', protect, async (req, res) => {
 // POST /api/expenses/save
 router.post('/save', protect, async (req, res) => {
   try {
-    const { items, people, splits, totalAmount } = req.body;
+    const { title, items, people, splits, totalAmount } = req.body;
 
     // AI categorize items before saving
     const categorizedItems = await categorizeItems(items);
 
     const expense = await Expense.create({
       createdBy: req.user._id,
+      title: title || '',
       items: categorizedItems,
       people,
       splits,

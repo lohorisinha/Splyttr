@@ -2,7 +2,7 @@
 
 > AI-powered receipt splitting app. Snap a receipt, assign items, and split bills in seconds.
 
-![Splyttr Dashboard](https://img.shields.io/badge/status-active-brightgreen) ![Stack](https://img.shields.io/badge/stack-React%20%2B%20Node.js%20%2B%20MongoDB-blue) ![AI](https://img.shields.io/badge/AI-Claude%20API-purple)
+![Splyttr Dashboard](https://img.shields.io/badge/status-active-brightgreen) ![Stack](https://img.shields.io/badge/stack-React%20%2B%20Node.js%20%2B%20MongoDB-blue)
 
 ---
 
@@ -59,12 +59,6 @@ Splyttr makes splitting bills effortless. Instead of manually entering every ite
 ## Screenshots
 
 > Dashboard, Analytics, and Receipt scanning screenshots coming soon.
-
----
-
-## License
-
-MIT
 
 ---
 

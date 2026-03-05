@@ -7,6 +7,7 @@ const expenseSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    title: { type: String, default: '' },
     items: [
       {
         name: { type: String, required: true },
