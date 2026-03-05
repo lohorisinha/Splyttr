@@ -67,7 +67,7 @@ function SplitResult() {
       {/* Header */}
       <div
         style={{ backgroundColor: navBg }}
-        className="shadow-lg sticky top-0 z-40 relative"
+        className="shadow-lg sticky top-0 z-40"
       >
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center">
           <button
