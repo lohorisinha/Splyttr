@@ -1,15 +1,21 @@
-const User = require('../models/User');
+const resend = new Resend(process.env.RESEND_API_KEY);const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { Resend } = require('resend');
+const nodemailer = require('nodemailer');
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  }
+});
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 const sendOTPEmail = async (email, name, otp) => {
-  await resend.emails.send({
-    from: 'onboarding@resend.dev',
+  await transporter.sendMail({
+    from: `"Splyttr 🧾" <${process.env.GMAIL_USER}>`,
     to: email,
     subject: 'Verify your Splyttr account',
     html: `
@@ -71,8 +77,8 @@ const sendOTPEmail = async (email, name, otp) => {
 };
 
 const sendWelcomeEmail = async (email, name) => {
-  await resend.emails.send({
-    from: 'onboarding@resend.dev',
+  await transporter.sendMail({
+    from: `"Splyttr 🧾" <${process.env.GMAIL_USER}>`,
     to: email,
     subject: 'Welcome to Splyttr 🧾',
     html: `
