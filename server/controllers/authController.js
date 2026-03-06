@@ -1,24 +1,26 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
+const axios = require('axios');
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS,
-  }
-});
+const sendEmail = async (to, subject, html) => {
+  await axios.post('https://api.brevo.com/v3/smtp/email', {
+    sender: { name: 'Splyttr', email: 'lohorisinha06@gmail.com' },
+    to: [{ email: to }],
+    subject,
+    htmlContent: html,
+  }, {
+    headers: {
+      'api-key': process.env.BREVO_API_KEY,
+      'Content-Type': 'application/json',
+    }
+  });
+};
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 const sendOTPEmail = async (email, name, otp) => {
-  await transporter.sendMail({
-    from: `"Splyttr 🧾" <${process.env.GMAIL_USER}>`,
-    to: email,
-    subject: 'Verify your Splyttr account',
-    html: `
+  await sendEmail(email, 'Verify your Splyttr account', `
       <!DOCTYPE html>
       <html>
       <head>
@@ -72,16 +74,11 @@ const sendOTPEmail = async (email, name, otp) => {
         </table>
       </body>
       </html>
-    `
-  });
+    `);
 };
 
 const sendWelcomeEmail = async (email, name) => {
-  await transporter.sendMail({
-    from: `"Splyttr 🧾" <${process.env.GMAIL_USER}>`,
-    to: email,
-    subject: 'Welcome to Splyttr 🧾',
-    html: `
+  await sendEmail(email, 'Welcome to Splyttr 🧾', `
       <!DOCTYPE html>
       <html>
       <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -162,8 +159,7 @@ const sendWelcomeEmail = async (email, name) => {
         </table>
       </body>
       </html>
-    `
-  });
+    `);
 };
 
 // Register — save user unverified, send OTP
