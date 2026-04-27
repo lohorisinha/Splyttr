@@ -3,7 +3,7 @@
 
 ![Status](https://img.shields.io/badge/status-active-brightgreen) ![Stack](https://img.shields.io/badge/stack-React%20%2B%20Node.js%20%2B%20MongoDB-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
-**Live Demo → [splyttr-orcin.vercel.app](https://splyttr-orcin.vercel.app)**
+**Live Demo → [splyttr-live.vercel.app](https://splyttr-live.vercel.app)**
 
 ---
 
