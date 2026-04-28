@@ -2,8 +2,8 @@
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-splyttr--live.vercel.app-2d6a4f?style=for-the-badge)](https://splyttr-live.vercel.app)
 ![Status](https://img.shields.io/badge/status-active-52b788?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-1b4332?style=for-the-badge)
-&nbsp;
 
+&nbsp;
 ## 📚 | Introduction
 > Tired of the "I think I had the pasta?" conversation at the end of every dinner?
 
@@ -14,7 +14,6 @@
 - Every split is saved to the cloud, with a full **analytics dashboard** showing spending trends, top split partners, and category breakdowns.
 
 &nbsp;
-
 ## 🔄 | How It Works
 
 ```mermaid
@@ -28,7 +27,6 @@ flowchart LR
 ```
 
 &nbsp;
-
 ## 🏗️ | Architecture
 
 ```mermaid
@@ -41,7 +39,6 @@ graph TD
 ```
 
 &nbsp;
-
 ## 🛠️ | Tech Stack
 
 | Layer | Technology |
@@ -53,11 +50,8 @@ graph TD
 | 🤖 AI | Google Gemini API |
 | 🔐 Auth | JWT |
 | 🚀 Deployment | Vercel + Render |
-
 &nbsp;
 
 Built with 💚 by **[Lohori Sinha](https://github.com/lohorisinha)**
-
 Open to feedback, collabs, and internship opportunities! &lt;3
-
 ---
