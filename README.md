@@ -1,5 +1,155 @@
 <div align="center">
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0,1b4332,2d6a4f,52b788&height=220&section=header&text=Splyttr%20🧾&fontSize=72&fontColor=ffffff&fontAlignY=40&desc=Split%20bills,%20not%20friendships.&descAlignY=62&descColor=d8f3dc&animation=fadeIn" width="100%"/>
+
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-splyttr--live.vercel.app-2d6a4f?style=for-the-badge)](https://splyttr-live.vercel.app)
+&nbsp;
+![Status](https://img.shields.io/badge/status-active-52b788?style=for-the-badge)
+&nbsp;
+![License](https://img.shields.io/badge/license-MIT-1b4332?style=for-the-badge)
+
+</div>
+
+---
+
+<div align="center">
+
+## 🌿 What is Splyttr?
+
+</div>
+
+Splyttr is an **AI-powered bill splitting app** that turns a photo of your receipt into a fully calculated split — in seconds. No mental math, no spreadsheets, no awkward silences at the end of dinner.
+
+What makes Splyttr different from just splitting the total equally:
+
+- 🎯 **Item-level precision** — assign exactly what each person ordered, not a rough guess
+- 🤖 **AI categorization** — Google Gemini automatically tags every item (Food, Drinks, Entertainment) so your spending is organized without any effort
+- 📊 **Spending analytics** — see trends over time, your top split partners, and where your money actually goes
+- 🧾 **Receipt OCR** — Tesseract.js reads your receipt photo so you never have to type a single item manually
+- 📄 **PDF receipts** — download a clean summary of any split to share with friends
+
+---
+
+<div align="center">
+
+## ✨ Features
+
+</div>
+
+**Core**
+
+- 📸 Upload a receipt photo → OCR extracts every item and price automatically
+- 👥 Assign specific items to specific people, or split one item between many
+- 💰 Track who actually paid the bill — everyone sees exactly what they owe
+- 💾 Every split is saved to the cloud and accessible anytime
+- 📄 Export any split as a clean downloadable PDF
+
+**Analytics**
+
+- 🏷️ Every item auto-categorized by Gemini AI — no manual tagging
+- 📊 Visual dashboard with donut, area, bar & radar charts
+- 📅 Monthly spending trends and day-of-week breakdowns
+- 🤝 See your top split partners over time
+- 🌙 Full dark / light mode across every page
+
+---
+
+<div align="center">
+
+## 🔄 How It Works
+
+```mermaid
+flowchart LR
+    A[📸 Snap\nReceipt] --> B[👀 Review\nItems]
+    B --> C[👥 Assign\nto People]
+    C --> D[💳 Who\nPaid?]
+    D --> E[🧮 Auto\nSplit]
+    E --> F[💾 Save\nto Cloud]
+    F --> G[📊 Analyze\nSpending]
+
+    style A fill:#1b4332,color:#d8f3dc,stroke:#52b788
+    style B fill:#2d6a4f,color:#d8f3dc,stroke:#52b788
+    style C fill:#40916c,color:#ffffff,stroke:#52b788
+    style D fill:#52b788,color:#1b4332,stroke:#2d6a4f
+    style E fill:#74c69d,color:#1b4332,stroke:#2d6a4f
+    style F fill:#95d5b2,color:#1b4332,stroke:#2d6a4f
+    style G fill:#b7e4c7,color:#1b4332,stroke:#2d6a4f
+```
+
+</div>
+
+---
+
+<div align="center">
+
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    U[🌐 User Browser] --> F
+
+    F["🎨 React Frontend\nVercel · Tailwind CSS · Chart.js"]
+    F -->|REST API| B
+
+    B["⚙️ Express Backend\nRender.com · Node.js · JWT Auth"]
+    B --> DB
+    B --> AI
+
+    DB["🗄️ MongoDB Atlas\nMongoose ODM"]
+    AI["🤖 Google Gemini\nAI Categorization"]
+
+    style U fill:#1b4332,color:#d8f3dc,stroke:#52b788
+    style F fill:#2d6a4f,color:#ffffff,stroke:#52b788
+    style B fill:#40916c,color:#ffffff,stroke:#74c69d
+    style DB fill:#52b788,color:#1b4332,stroke:#2d6a4f
+    style AI fill:#74c69d,color:#1b4332,stroke:#2d6a4f
+```
+
+</div>
+
+---
+
+<div align="center">
+
+## 🛠️ Tech Stack
+
+</div>
+
+- 🎨 **Frontend** — React 18, React Router, Tailwind CSS, Chart.js
+- ⚙️ **Backend** — Node.js, Express.js
+- 🗄️ **Database** — MongoDB Atlas (Mongoose)
+- 👁️ **OCR** — Tesseract.js
+- 🤖 **AI** — Google Gemini API
+- 🔐 **Auth** — JWT
+- 🚀 **Deployment** — Vercel + Render
+
+---
+
+<div align="center">
+
+## 👩‍💻 Author
+
+Built with 💚 by **[Lohori Sinha](https://github.com/lohorisinha)**
+
+Open to feedback, collabs, and internship opportunities &lt;3
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0,52b788,2d6a4f,1b4332&height=120&section=footer" width="100%"/>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div align="center">
+
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0,1a3a2a,2d6a4f&height=200&section=header&text=Splyttr&fontSize=80&fontColor=b7e4c7&fontAlignY=38&desc=Split%20bills,%20not%20friendships.&descAlignY=58&descColor=95d5b2&animation=fadeIn" width="100%"/>
 
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-splyttr--live.vercel.app-2d6a4f?style=for-the-badge&logoColor=white)](https://splyttr-live.vercel.app)
