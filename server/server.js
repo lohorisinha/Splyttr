@@ -8,6 +8,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'https://splyttr-orcin.vercel.app'
+    'https://splyttr-live.vercel.app'
   ],
   credentials: true
 }));
