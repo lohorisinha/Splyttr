@@ -1,7 +1,7 @@
 # Splyttr 🧾
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-splyttr--live.vercel.app-2d6a4f?style=for-the-badge)](https://splyttr-live.vercel.app)
-![Status](https://img.shields.io/badge/status-active-52b788?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-1b4332?style=for-the-badge)
+[![Status](https://img.shields.io/badge/status-active-52b788?style=for-the-badge)](https://splyttr-orcin.vercel.app)
+[![License](https://img.shields.io/badge/license-MIT-1b4332?style=for-the-badge)](LICENSE)
 &nbsp;
 ## 📚 | Introduction
 > Tired of the "I think I had the pasta?" conversation at the end of every dinner?
