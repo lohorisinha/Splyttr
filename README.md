@@ -47,9 +47,11 @@ graph TD
 | 🔐 Auth | JWT |
 | 🚀 Deployment | Vercel + Render |
 &nbsp;
+## 📝 | License
+ 
+Copyright © 2026 [Lohori Sinha](https://github.com/lohorisinha).
+This project is [MIT](https://github.com/lohorisinha/Splyttr/blob/main/LICENSE) licensed.
 
 Built with 💚 by **[Lohori Sinha](https://github.com/lohorisinha)**
-
-Open to feedback, collabs, and internship opportunities! &lt;3
 
 ---
