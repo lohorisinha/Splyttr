@@ -49,6 +49,7 @@ graph TD
 &nbsp;
 
 Built with 💚 by **[Lohori Sinha](https://github.com/lohorisinha)**
+
 Open to feedback, collabs, and internship opportunities! &lt;3
 
 ---
